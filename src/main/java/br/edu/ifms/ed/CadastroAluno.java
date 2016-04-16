@@ -1,16 +1,26 @@
 package br.edu.ifms.ed;
 
-import br.edu.ifms.ed.util.AtributosVisuais;
+import br.edu.ifms.ed.constant.Textual;
+import br.edu.ifms.ed.ui.Cor;
+import br.edu.ifms.ed.ui.Fonte;
+import br.edu.ifms.ed.ui.Icone;
+import br.edu.ifms.ed.ui.JItemUI;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CadastroAluno implements AtributosVisuais {
+public class CadastroAluno {
 
     private JFrame telaPrincipal;
+
+    /**
+     * Create the application.
+     */
+    private CadastroAluno() {
+        initialize();
+    }
 
     /**
      * Launch the application.
@@ -27,155 +37,116 @@ public class CadastroAluno implements AtributosVisuais {
     }
 
     /**
-     * Create the application.
-     */
-    private CadastroAluno() {
-        initialize();
-    }
-
-    /**
      * Initialize the contents of the frame.
      */
     private void initialize() {
-
         telaPrincipal = new JFrame();
-        telaPrincipal.getContentPane().setBackground(brancoUm);
+        telaPrincipal.getContentPane().setBackground(Cor.PRIMARY_COLOR);
         telaPrincipal.setResizable(false);
-        telaPrincipal.setBackground(brancoDois);
-        telaPrincipal.getContentPane().setFont(consolasPlainQuize);
+        telaPrincipal.getContentPane().setFont(Fonte.PRIMARY_FONT);
         telaPrincipal.getContentPane().setMaximumSize(new Dimension(400, 400));
-        telaPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastroAluno.class.getResource(caminhoLogo)));
-        telaPrincipal.setTitle("Cadastro de alunos v1.3");
+        telaPrincipal.setIconImage(Icone.LOGO.getImage());
+        telaPrincipal.setTitle(Textual.TITLE_VERSION);
         telaPrincipal.setBounds(100, 100, 339, 530);
         telaPrincipal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        telaPrincipal.getContentPane().setLayout(null);
 
-
-        JButton botaoCalcularMedia = new JButton("Calcular media");
-        botaoCalcularMedia.setBackground(verdeAmarelado);
-        botaoCalcularMedia.setForeground(brancoUm);
+        JButton botaoCalcularMedia = JItemUI.button(Textual.CALCULAR_MEDIA, Cor.BLUE_GREEN, "calcularMedia",
+                Cor.PRIMARY_COLOR, Textual.CALCULAR_MEDIA_TOOLTIP);
         botaoCalcularMedia.setBounds(61, 390, 208, 41);
-        botaoCalcularMedia.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "calcularMedia.png")));
-        botaoCalcularMedia.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        botaoCalcularMedia.setFont(tahomaNegritoTreze);
         botaoCalcularMedia.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.calcularMedia();
+                operacoes.calcularMedia(telaPrincipal);
             }
         });
-        telaPrincipal.getContentPane().setLayout(null);
-        botaoCalcularMedia.setToolTipText("Clique  aqui para calcular a media");
         telaPrincipal.getContentPane().add(botaoCalcularMedia);
 
-        JButton botaoExcluirAluno = new JButton("Excluir Aluno");
-        botaoExcluirAluno.setBackground(vermelho);
-        botaoExcluirAluno.setForeground(brancoUm);
+        JButton botaoExcluirAluno = JItemUI.button(Textual.EXCLUIR_ALUNO, Cor.RED, "excluirAlunos",
+                Cor.PRIMARY_COLOR, Textual.EXCLUIR_ALUNO_TOOLTIP);
         botaoExcluirAluno.setBounds(61, 438, 208, 42);
-        botaoExcluirAluno.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        botaoExcluirAluno.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "excluirAlunos.png")));
-        botaoExcluirAluno.setFont(tahomaNegritoTreze);
         botaoExcluirAluno.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.excluirAluno();
+                operacoes.excluirAluno(telaPrincipal);
             }
         });
-        botaoExcluirAluno.setToolTipText("Clique aqui excluir um aluno");
         telaPrincipal.getContentPane().add(botaoExcluirAluno);
 
-        JLabel textoCadastroDeAlunos = new JLabel("Cadastro de alunos");
-        textoCadastroDeAlunos.setFont(tahomaNegritoVinteDois);
+        JLabel textoCadastroDeAlunos = new JLabel(Textual.TITLE);
+        textoCadastroDeAlunos.setFont(new Font("tahoma", Font.BOLD, 22));
         textoCadastroDeAlunos.setBounds(0, 11, 337, 54);
-        textoCadastroDeAlunos.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoLogo)));
+        textoCadastroDeAlunos.setIcon(Icone.LOGO);
         textoCadastroDeAlunos.setToolTipText("Cadastro de alunos através de pilha");
         textoCadastroDeAlunos.setHorizontalAlignment(SwingConstants.CENTER);
-        textoCadastroDeAlunos.setForeground(verdeEscuro);
+        textoCadastroDeAlunos.setForeground(Cor.GREEN_DARK);
         telaPrincipal.getContentPane().add(textoCadastroDeAlunos);
 
         JPanel painelInserir = new JPanel();
-        painelInserir.setBackground(brancoUm);
+        painelInserir.setBackground(Cor.PRIMARY_COLOR);
         painelInserir.setBounds(51, 66, 230, 145);
         painelInserir.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        painelInserir.setFont(consolasPlainQuize);
-        painelInserir.setForeground(preto);
-        painelInserir.setBorder(new TitledBorder(borda, "Cadastrar", TitledBorder.LEADING, TitledBorder.TOP, null, preto));
+        painelInserir.setFont(new Font("consolas", Font.PLAIN, 15));
+        painelInserir.setForeground(Cor.BLACK);
+        painelInserir.setBorder(JItemUI.titledBorder("Cadastrar"));
         telaPrincipal.getContentPane().add(painelInserir);
         painelInserir.setLayout(null);
 
-        JButton botaoCadastrarAluno = new JButton("Cadastrar Aluno");
-        botaoCadastrarAluno.setBackground(roxo);
-        botaoCadastrarAluno.setForeground(brancoUm);
-        botaoCadastrarAluno.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        JButton botaoCadastrarAluno = JItemUI.button(Textual.CADASTRAR_ALUNO, Cor.PURPLE, "cadastrarAluno",
+                Cor.PRIMARY_COLOR, Textual.CADASTRAR_ALUNO_TOOLTIP);
         botaoCadastrarAluno.setBounds(10, 30, 208, 41);
         painelInserir.add(botaoCadastrarAluno);
-        botaoCadastrarAluno.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "cadastrarAluno.png")));
-        botaoCadastrarAluno.setFont(tahomaNegritoTreze);
         botaoCadastrarAluno.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.cadastrandoAluno();
+                operacoes.cadastrandoAluno(telaPrincipal);
             }
         });
-        botaoCadastrarAluno.setToolTipText("Clique aqui cadastrar um aluno");
 
-        JButton botaoCadastrarNota = new JButton("Cadastrar Nota");
-        botaoCadastrarNota.setBackground(azul);
-        botaoCadastrarNota.setForeground(brancoUm);
-        botaoCadastrarNota.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "cadastrarNota.png")));
-        botaoCadastrarNota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        JButton botaoCadastrarNota = JItemUI.button(Textual.CADASTRAR_NOTA, Cor.BLUE, "cadastrarNota",
+                Cor.PRIMARY_COLOR, Textual.CADASTRAR_NOTA_TOOLTIP);
         botaoCadastrarNota.setBounds(10, 82, 208, 41);
         painelInserir.add(botaoCadastrarNota);
-        botaoCadastrarNota.setFont(tahomaNegritoTreze);
         botaoCadastrarNota.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.cadastroNota();
+                operacoes.cadastroNota(telaPrincipal);
             }
         });
-        botaoCadastrarNota.setToolTipText("Clique aqui para inserir uma nota");
 
         JPanel painelConsulta = new JPanel();
-        painelConsulta.setBackground(new Color(255, 250, 250));
+        painelConsulta.setBackground(Cor.PRIMARY_COLOR);
         painelConsulta.setBounds(51, 223, 230, 146);
-        painelConsulta.setBorder(new TitledBorder(borda, "Consulta",
-                TitledBorder.LEADING, TitledBorder.TOP, null, preto));
+        painelConsulta.setBorder(JItemUI.titledBorder("Consulta"));
         telaPrincipal.getContentPane().add(painelConsulta);
         painelConsulta.setLayout(null);
 
-        JButton botaoConsultarAluno = new JButton("Consultar Aluno");
-        botaoConsultarAluno.setBackground(laranja);
+        JButton botaoConsultarAluno = JItemUI.button(Textual.CONSULTAR_ALUNO, Cor.ORANGE, "procurarAluno",
+                Cor.BLACK, Textual.CONSULTAR_ALUNO_TOOLTIP);
         botaoConsultarAluno.setBounds(14, 30, 204, 41);
         painelConsulta.add(botaoConsultarAluno);
-        botaoConsultarAluno.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        botaoConsultarAluno.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "procurarAluno.png")));
-        botaoConsultarAluno.setFont(tahomaNegritoTreze);
         botaoConsultarAluno.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.consultaAluno();
+                operacoes.consultaAluno(telaPrincipal);
             }
         });
-        botaoConsultarAluno.setToolTipText("Clique aqui para consultar por um aluno");
 
-        JButton botaoExibirAlunos = new JButton("Exibir Alunos");
-        botaoExibirAlunos.setBackground(amarelo);
+        JButton botaoExibirAlunos = JItemUI.button(Textual.EXIBIR_ALUNOS, Cor.YELLOW, "exibirAlunos",
+                Cor.BLACK, Textual.EXIBIR_ALUNOS_TOOLTIP);
         botaoExibirAlunos.setBounds(14, 82, 204, 41);
         painelConsulta.add(botaoExibirAlunos);
-        botaoExibirAlunos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        botaoExibirAlunos.setIcon(new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "exibirAlunos.png")));
-        botaoExibirAlunos.setFont(tahomaNegritoTreze);
         botaoExibirAlunos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Operacoes operacoes = new Operacoes();
-                operacoes.exibirAlunos();
+                operacoes.exibirAlunos(telaPrincipal);
             }
         });
-        botaoExibirAlunos.setToolTipText("Clique aqui para exibir os alunos");
     }
 }

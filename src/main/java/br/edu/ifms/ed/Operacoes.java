@@ -1,37 +1,47 @@
 package br.edu.ifms.ed;
 
+import br.edu.ifms.ed.constant.Textual;
 import br.edu.ifms.ed.model.Aluno;
-import br.edu.ifms.ed.util.AtributosVisuais;
+import br.edu.ifms.ed.ui.Icone;
+import br.edu.ifms.ed.ui.JItemUI;
 
 import javax.swing.*;
 import java.util.Objects;
 import java.util.Stack;
 
-public class Operacoes implements AtributosVisuais {
+public class Operacoes {
+
+    String cadastroAluno = "Cadastro do aluno";
+    String cadastroNotas = "Cadastro de notas";
+    String codigoAluno = "Código do aluno";
+    String calcularMedia = "Calcular media";
+    String excluirAluno = "Excluir Alunos";
 
     private static Stack<Aluno> pilha = new Stack<>();
 
     /**
      * Método para fazer o cadastro da nota do aluno
      */
-    public void cadastroNota() {
-        int tamanho, contador;
+    public void cadastroNota(JFrame frame) {
+        int tamanho;
+        int contador;
         String codigo;
 
-        if (pilha.empty()) pilhaVazia(cadastroNotas);
+        if (pilha.empty())
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, cadastroNotas);
         else {
             contador = 0;
-            codigo = pegaCodigoAluno();
+            codigo = pegaCodigoAluno(frame);
             tamanho = pilha.size() - 1;
             while (tamanho != -1) {
                 if (pilha.get(tamanho).getCodigoAluno().equals(codigo)) {
-                    cadastrarNota(pilha.get(tamanho));
+                    cadastrarNota(pilha.get(tamanho), frame);
                     contador++;
                 }
                 tamanho--;
             }
             if (contador == 0) {
-                JOptionPane.showMessageDialog(null, "Aluno não encontrado", cadastroNotas, JOptionPane.WARNING_MESSAGE);
+                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, cadastroNotas);
             }
         }
     }
@@ -42,10 +52,10 @@ public class Operacoes implements AtributosVisuais {
      * @param aluno - Objeto de aluno
      * @return Retorna a nota do aluno
      */
-    private Aluno cadastrarNota(Aluno aluno) {
+    private Aluno cadastrarNota(Aluno aluno, JFrame frame) {
         double numeroConvertido = 0;
         boolean ok = false;
-        ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "cadastrarNota.png"));
+        ImageIcon icone = Icone.CADASTRAR_NOTA;
 
         do {
             String codigo = (String) JOptionPane.showInputDialog(null,
@@ -55,12 +65,11 @@ public class Operacoes implements AtributosVisuais {
                 numeroConvertido = Double.parseDouble(codigo);
                 ok = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Não foi possível inserir a nota ao aluno", cadastroNotas, JOptionPane.ERROR_MESSAGE);
+                JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, cadastroNotas);
             }
         } while (!ok);
 
-        JOptionPane.showMessageDialog(null, "Nota cadastrada", cadastroNotas, JOptionPane.INFORMATION_MESSAGE, icone);
-
+        JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, cadastroNotas, icone);
         aluno.setNota(numeroConvertido);
         return aluno;
     }
@@ -70,16 +79,15 @@ public class Operacoes implements AtributosVisuais {
      *
      * @return código do aluno
      */
-    private String pegaCodigoAluno() {
+    private String pegaCodigoAluno(JFrame frame) {
         String codigo;
 
-        ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "cadastrarAluno.png"));
+        ImageIcon icone = Icone.CADASTRAR_ALUNO;
         do {
             codigo = (String) JOptionPane.showInputDialog(null,
                     "Digite um código para aluno: ", codigoAluno, JOptionPane.PLAIN_MESSAGE, icone, null, null);
             if (codigo == null || codigo.isEmpty()) {
-                JOptionPane.showMessageDialog(null,
-                        "O código do aluno não pode ser em branco ou nulo", codigoAluno, JOptionPane.ERROR_MESSAGE);
+                JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, codigoAluno);
             }
         } while (codigo == null || codigo.isEmpty());
 
@@ -92,8 +100,8 @@ public class Operacoes implements AtributosVisuais {
      * @param aluno - Objeto de aluno
      * @return retorna o código do aluno igual a uma matricula
      */
-    private Aluno cadastrarAluno(Aluno aluno) {
-        String codigo = pegaCodigoAluno();
+    private Aluno cadastrarAluno(Aluno aluno, JFrame frame) {
+        String codigo = pegaCodigoAluno(frame);
         aluno.setCodigoAluno(codigo);
         return aluno;
     }
@@ -101,9 +109,9 @@ public class Operacoes implements AtributosVisuais {
     /**
      * Método para fazer o cadastro do aluno
      */
-    public void cadastrandoAluno() {
+    public void cadastrandoAluno(JFrame frame) {
         Aluno aluno = new Aluno();
-        cadastrarAluno(aluno);
+        cadastrarAluno(aluno, frame);
 
         boolean erro = false;
         int aux = pilha.size() - 1;
@@ -116,25 +124,26 @@ public class Operacoes implements AtributosVisuais {
         }
 
         if (erro) {
-            JOptionPane.showMessageDialog(null, "Já possui um aluno cadastrado com esse código", cadastroAluno, JOptionPane.ERROR_MESSAGE);
+            JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, cadastroAluno);
         } else {
             // Atribui o valor null pois somente o aluno foi cadastrado e a nota ainda não.
             aluno.setNota(null);
             pilha.push(aluno);
-
-            ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "cadastrarAluno.png"));
-            JOptionPane.showMessageDialog(null, "Aluno cadastrado", cadastroAluno, JOptionPane.INFORMATION_MESSAGE, icone);
+            JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, cadastroAluno, Icone.CADASTRAR_ALUNO);
+            ;
         }
     }
 
     /**
      * Método para fazer o calculo da media dos alunos
      */
-    public void calcularMedia() {
-        int tamanho, cont;
+    public void calcularMedia(JFrame frame) {
+        int tamanho;
+        int cont;
         double media;
 
-        if (pilha.empty()) pilhaVazia("Calcular media");
+        if (pilha.empty())
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.CALCULAR_MEDIA);
         else {
             tamanho = pilha.size() - 1;
             cont = 0;
@@ -147,19 +156,17 @@ public class Operacoes implements AtributosVisuais {
                 tamanho--;
             }
 
-            ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "calcularMedia.png"));
+            ImageIcon icone = Icone.CALCULAR_MEDIA;
 
             if (cont != 0) {
                 media /= cont;
                 if (cont == 1) {
-                    JOptionPane.showMessageDialog(null, "Media do aluno: "
-                            + media, calcularMedia, JOptionPane.INFORMATION_MESSAGE, icone);
+                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNO + media, calcularMedia, icone);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Media dos alunos: "
-                            + media, calcularMedia, JOptionPane.INFORMATION_MESSAGE, icone);
+                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNOS + media, calcularMedia, icone);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Não existem notas cadastradas!", calcularMedia, JOptionPane.ERROR_MESSAGE);
+                JItemUI.showErrorMesssge(frame, Textual.SEM_NOTAS_CADASTRADAS, calcularMedia);
             }
         }
     }
@@ -167,48 +174,51 @@ public class Operacoes implements AtributosVisuais {
     /**
      * Método para exibir o aluno
      */
-    public void exibirAlunos() {
+    public void exibirAlunos(JFrame frame) {
         int tamanho;
 
-        if (pilha.empty()) pilhaVazia("Exibir alunos");
+        if (pilha.empty())
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.EXIBIR_ALUNOS);
         else {
             String texto = "";
             tamanho = pilha.size() - 1;
             while (tamanho != -1) {
-                texto += ("Código: " + pilha.get(tamanho).getCodigoAluno() + " ");
-                if (pilha.get(tamanho).getNota() != null) texto += ("Nota: " + pilha.get(tamanho).getNota() + "\r\n");
-                else texto += "Nota não cadastrada!\r\n";
+                texto += (Textual.CODIGO + pilha.get(tamanho).getCodigoAluno() + " ");
+                if (pilha.get(tamanho).getNota() != null)
+                    texto += (Textual.NOTA + pilha.get(tamanho).getNota() + "\r\n");
+                else
+                    texto += Textual.SEM_NOTA;
                 tamanho--;
             }
 
-            ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "exibirAlunos.png"));
-
-            JOptionPane.showMessageDialog(null, texto, "Exibir alunos", JOptionPane.INFORMATION_MESSAGE, icone);
+            JItemUI.showInfoMesssge(frame, texto, Textual.EXIBIR_ALUNOS, Icone.EXIBIR_ALUNO);
         }
     }
 
-    public void consultaAluno() {
-        int tamanho, contador;
+    public void consultaAluno(JFrame frame) {
+        int tamanho;
+        int contador;
         String codigo;
 
-        if (pilha.empty()) pilhaVazia("Consulta de alunos");
+        if (pilha.empty())
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.CONSULTA_DE_ALUNOS);
         else {
             tamanho = pilha.size() - 1;
-            codigo = pegaCodigoAluno();
+            codigo = pegaCodigoAluno(frame);
             contador = 0;
 
-            ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "procurarAluno.png"));
+            ImageIcon icone = Icone.PROCURAR_ALUNO;
 
             while (tamanho != -1) {
                 if (pilha.get(tamanho).getCodigoAluno().equals(codigo)) {
                     contador++;
-                    JOptionPane.showMessageDialog(null, "O aluno " + pilha.get(tamanho).getCodigoAluno()
-                            + " esta cadastrado", "Consulta de alunos", JOptionPane.INFORMATION_MESSAGE, icone);
+                    String texto = Textual.O_ALUNO + pilha.get(tamanho).getCodigoAluno() + Textual.ESTA_CADASTRADO;
+                    JItemUI.showInfoMesssge(frame, texto, Textual.CONSULTA_DE_ALUNOS, icone);
                 }
                 tamanho--;
             }
             if (contador == 0) {
-                JOptionPane.showMessageDialog(null, "Este aluno não foi cadastrado", "Consulta de alunos", JOptionPane.ERROR_MESSAGE);
+                JItemUI.showErrorMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CONSULTA_DE_ALUNOS);
             }
 
         }
@@ -217,22 +227,24 @@ public class Operacoes implements AtributosVisuais {
     /**
      * Método para excluir os alunos
      */
-    public void excluirAluno() {
+    public void excluirAluno(JFrame frame) {
         String codigo;
 
-        if (pilha.empty()) pilhaVazia(excluirAluno);
+        if (pilha.empty())
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, excluirAluno);
         else {
             int tamanho = pilha.size() - 1;
             // Código do aluno que o usuário quer remover
-            codigo = pegaCodigoAluno();
+            codigo = pegaCodigoAluno(frame);
 
             int cont = 0;
             // Verifica se o código foi cadastrado
             while (tamanho != -1) {
-                if (codigo.equals(pilha.get(tamanho).getCodigoAluno())) cont++;
+                if (codigo.equals(pilha.get(tamanho).getCodigoAluno()))
+                    cont++;
                 tamanho--;
             }
-            ImageIcon icone = new ImageIcon(CadastroAluno.class.getResource(caminhoImagem + "excluirAlunos.png"));
+
             if (cont > 0) {
                 while (!Objects.equals(pilha.peek().getCodigoAluno(), codigo)
                         || pilha.peek().getCodigoAluno().equals(codigo)) {
@@ -242,20 +254,10 @@ public class Operacoes implements AtributosVisuais {
                     }
                     pilha.pop();
                 }
-                JOptionPane.showMessageDialog(null, "Aluno excluído", excluirAluno, JOptionPane.INFORMATION_MESSAGE, icone);
+                JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, excluirAluno, Icone.EXCLUIR_ALUNO);
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "Aluno informado não foi cadastrado", excluirAluno, JOptionPane.WARNING_MESSAGE);
+                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, excluirAluno);
             }
         }
-    }
-
-    /**
-     * Método para mostrar a mensagem de pilha vazia
-     *
-     * @param titulo - Título que ira aparecer na tela
-     */
-    private void pilhaVazia(String titulo) {
-        JOptionPane.showMessageDialog(null, "Não existem alunos cadastrados!", titulo, JOptionPane.ERROR_MESSAGE);
     }
 }
