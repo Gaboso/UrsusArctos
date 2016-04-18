@@ -41,11 +41,11 @@ public class Textual {
     public static final String CODIGO = "Código: ";
     public static final String NOTA = "Nota: ";
     public static final String SEM_NOTA = "Sem nota!\r\n";
-    public static final String CONSULTA_DE_ALUNOS ="Consulta de alunos";
-    public static final String O_ALUNO="O aluno ";
-    public static final String ESTA_CADASTRADO=" está cadastrado";
-    public static final String ALUNO_EXCLUIDO="Aluno excluído";
-    public static final String SEM_ALUNOS_CADASTRADOS="Não existem alunos cadastrados!";
+    public static final String CONSULTA_DE_ALUNOS = "Consulta de alunos";
+    public static final String O_ALUNO = "O aluno ";
+    public static final String ESTA_CADASTRADO = " está cadastrado";
+    public static final String ALUNO_EXCLUIDO = "Aluno excluído";
+    public static final String SEM_ALUNOS_CADASTRADOS = "Não existem alunos cadastrados!";
 
 
     private Textual() {

@@ -3,7 +3,7 @@ package br.edu.ifms.ed.ui;
 import java.awt.*;
 
 /**
- *  Classe com o conteúdo de cores a ser utilizado na aplicação.
+ * Classe com o conteúdo de cores a ser utilizado na aplicação.
  */
 public class Cor {
 
@@ -21,6 +21,7 @@ public class Cor {
     public static final Color PRIMARY_COLOR = WHITE;
     public static final Color SECONDARY_COLOR = GREEN;
 
-    private Cor(){}
+    private Cor() {
+    }
 
 }

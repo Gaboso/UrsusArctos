@@ -34,7 +34,7 @@ public class Operacoes {
             codigo = pegaCodigoAluno(frame);
             tamanho = pilha.size() - 1;
             while (tamanho != -1) {
-                if (pilha.get(tamanho).getCodigoAluno().equals(codigo)) {
+                if (pilha.get(tamanho).getCodigo().equals(codigo)) {
                     cadastrarNota(pilha.get(tamanho), frame);
                     contador++;
                 }
@@ -102,7 +102,7 @@ public class Operacoes {
      */
     private Aluno cadastrarAluno(Aluno aluno, JFrame frame) {
         String codigo = pegaCodigoAluno(frame);
-        aluno.setCodigoAluno(codigo);
+        aluno.setCodigo(codigo);
         return aluno;
     }
 
@@ -116,7 +116,7 @@ public class Operacoes {
         boolean erro = false;
         int aux = pilha.size() - 1;
         while (aux != -1) {
-            if (pilha.get(aux).getCodigoAluno().equals(aluno.getCodigoAluno())) {
+            if (pilha.get(aux).getCodigo().equals(aluno.getCodigo())) {
                 erro = true;
                 break;
             }
@@ -183,7 +183,7 @@ public class Operacoes {
             String texto = "";
             tamanho = pilha.size() - 1;
             while (tamanho != -1) {
-                texto += (Textual.CODIGO + pilha.get(tamanho).getCodigoAluno() + " ");
+                texto += (Textual.CODIGO + pilha.get(tamanho).getCodigo() + " ");
                 if (pilha.get(tamanho).getNota() != null)
                     texto += (Textual.NOTA + pilha.get(tamanho).getNota() + "\r\n");
                 else
@@ -210,9 +210,9 @@ public class Operacoes {
             ImageIcon icone = Icone.PROCURAR_ALUNO;
 
             while (tamanho != -1) {
-                if (pilha.get(tamanho).getCodigoAluno().equals(codigo)) {
+                if (pilha.get(tamanho).getCodigo().equals(codigo)) {
                     contador++;
-                    String texto = Textual.O_ALUNO + pilha.get(tamanho).getCodigoAluno() + Textual.ESTA_CADASTRADO;
+                    String texto = Textual.O_ALUNO + pilha.get(tamanho).getCodigo() + Textual.ESTA_CADASTRADO;
                     JItemUI.showInfoMesssge(frame, texto, Textual.CONSULTA_DE_ALUNOS, icone);
                 }
                 tamanho--;
@@ -240,15 +240,15 @@ public class Operacoes {
             int cont = 0;
             // Verifica se o código foi cadastrado
             while (tamanho != -1) {
-                if (codigo.equals(pilha.get(tamanho).getCodigoAluno()))
+                if (codigo.equals(pilha.get(tamanho).getCodigo()))
                     cont++;
                 tamanho--;
             }
 
             if (cont > 0) {
-                while (!Objects.equals(pilha.peek().getCodigoAluno(), codigo)
-                        || pilha.peek().getCodigoAluno().equals(codigo)) {
-                    if (pilha.peek().getCodigoAluno().equals(codigo)) {
+                while (!Objects.equals(pilha.peek().getCodigo(), codigo)
+                        || pilha.peek().getCodigo().equals(codigo)) {
+                    if (pilha.peek().getCodigo().equals(codigo)) {
                         pilha.pop();
                         break;
                     }

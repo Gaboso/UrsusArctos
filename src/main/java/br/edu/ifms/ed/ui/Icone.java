@@ -18,5 +18,6 @@ public class Icone {
     public static final ImageIcon INFO = JItemUI.imageIcon("info");
     public static final ImageIcon WARN = JItemUI.imageIcon("warn");
 
-    private Icone(){}
+    private Icone() {
+    }
 }
