@@ -5,11 +5,6 @@ package br.edu.ifms.ed.constant;
  */
 public class Textual {
 
-
-    String cadastroNotas = "Cadastro de notas";
-    String codigoAluno = "Código do aluno";
-
-
     private static final String VERSION = "1.0";
     public static final String TITLE = "StackUI";
     public static final String TITLE_VERSION = TITLE + " - " + VERSION;
@@ -27,6 +22,7 @@ public class Textual {
     public static final String CALCULAR_MEDIA_TOOLTIP = "Clique  aqui para calcular a media";
 
 
+    public static final String CADASTRAR_ATRAVES_DE_PILHA = "Cadastro de alunos através de pilha";
     public static final String ALUNO_NAO_ENCONTRADO = "Aluno não encontrado";
     public static final String INSIRA_NOTA = "Insira uma nota para o aluno: ";
     public static final String NOTA_INVALIDA = "Não foi possível inserir a nota";

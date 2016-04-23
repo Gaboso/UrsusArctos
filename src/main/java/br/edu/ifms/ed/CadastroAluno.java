@@ -79,7 +79,7 @@ public class CadastroAluno {
         textoCadastroDeAlunos.setFont(new Font("tahoma", Font.BOLD, 22));
         textoCadastroDeAlunos.setBounds(0, 11, 337, 54);
         textoCadastroDeAlunos.setIcon(Icone.LOGO);
-        textoCadastroDeAlunos.setToolTipText("Cadastro de alunos através de pilha");
+        textoCadastroDeAlunos.setToolTipText(Textual.CADASTRAR_ATRAVES_DE_PILHA);
         textoCadastroDeAlunos.setHorizontalAlignment(SwingConstants.CENTER);
         textoCadastroDeAlunos.setForeground(Cor.GREEN_DARK);
         telaPrincipal.getContentPane().add(textoCadastroDeAlunos);
