@@ -2,20 +2,18 @@ package br.edu.ifms.ed.model;
 
 /**
  * Classe aluno com os atributos necessários para o cadastro
- *
- * @author Gabriel Carvalho
  */
 public class Aluno {
 
-    private String codigoAluno;
+    private String codigo;
     private Double nota;
 
-    public String getCodigoAluno() {
-        return codigoAluno;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoAluno(String codigoAluno) {
-        this.codigoAluno = codigoAluno;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Double getNota() {
