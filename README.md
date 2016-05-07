@@ -1,6 +1,6 @@
 # Ursus Arctos
 
-![logotipo](img/logo_128.png)
+![logotipo](img/logo_256.png)
 
 -----
 
