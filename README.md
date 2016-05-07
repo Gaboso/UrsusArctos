@@ -1,4 +1,4 @@
-# StackUI
+# Ursus Arctos
 
 ![logotipo](img/logo_128.png)
 

@@ -11,12 +11,6 @@ import java.util.Stack;
 
 public class Operacoes {
 
-    String cadastroAluno = "Cadastro do aluno";
-    String cadastroNotas = "Cadastro de notas";
-    String codigoAluno = "Código do aluno";
-    String calcularMedia = "Calcular media";
-    String excluirAluno = "Excluir Alunos";
-
     private static Stack<Aluno> pilha = new Stack<>();
 
     /**
@@ -28,7 +22,7 @@ public class Operacoes {
         String codigo;
 
         if (pilha.empty())
-            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, cadastroNotas);
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.CADASTRO_DE_NOTAS);
         else {
             contador = 0;
             codigo = pegaCodigoAluno(frame);
@@ -41,7 +35,7 @@ public class Operacoes {
                 tamanho--;
             }
             if (contador == 0) {
-                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, cadastroNotas);
+                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CADASTRO_DE_NOTAS);
             }
         }
     }
@@ -58,18 +52,18 @@ public class Operacoes {
         ImageIcon icone = Icone.CADASTRAR_NOTA;
 
         do {
-            String codigo = (String) JOptionPane.showInputDialog(null,
-                    "Digite uma nota para o aluno: ", cadastroNotas, JOptionPane.PLAIN_MESSAGE, icone, null, null);
+            String codigo = (String) JOptionPane.showInputDialog(null, Textual.INSIRA_NOTA, Textual.CADASTRO_DE_NOTAS,
+                    JOptionPane.PLAIN_MESSAGE, icone, null, null);
             try {
                 codigo = codigo.replaceAll(",", ".");
                 numeroConvertido = Double.parseDouble(codigo);
                 ok = true;
             } catch (Exception e) {
-                JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, cadastroNotas);
+                JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
             }
         } while (!ok);
 
-        JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, cadastroNotas, icone);
+        JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icone);
         aluno.setNota(numeroConvertido);
         return aluno;
     }
@@ -84,10 +78,10 @@ public class Operacoes {
 
         ImageIcon icone = Icone.CADASTRAR_ALUNO;
         do {
-            codigo = (String) JOptionPane.showInputDialog(null,
-                    "Digite um código para aluno: ", codigoAluno, JOptionPane.PLAIN_MESSAGE, icone, null, null);
+            codigo = (String) JOptionPane.showInputDialog(null, Textual.DIGITE_CODIGO_ALUNO, Textual.CODIGO_DO_ALUNO,
+                    JOptionPane.PLAIN_MESSAGE, icone, null, null);
             if (codigo == null || codigo.isEmpty()) {
-                JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, codigoAluno);
+                JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, Textual.CODIGO_DO_ALUNO);
             }
         } while (codigo == null || codigo.isEmpty());
 
@@ -124,13 +118,12 @@ public class Operacoes {
         }
 
         if (erro) {
-            JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, cadastroAluno);
+            JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
         } else {
             // Atribui o valor null pois somente o aluno foi cadastrado e a nota ainda não.
             aluno.setNota(null);
             pilha.push(aluno);
-            JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, cadastroAluno, Icone.CADASTRAR_ALUNO);
-            ;
+            JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, Icone.CADASTRAR_ALUNO);
         }
     }
 
@@ -161,12 +154,12 @@ public class Operacoes {
             if (cont != 0) {
                 media /= cont;
                 if (cont == 1) {
-                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNO + media, calcularMedia, icone);
+                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNO + media, Textual.CALCULAR_MEDIA, icone);
                 } else {
-                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNOS + media, calcularMedia, icone);
+                    JItemUI.showInfoMesssge(frame, Textual.MEDIA_ALUNOS + media, Textual.CALCULAR_MEDIA, icone);
                 }
             } else {
-                JItemUI.showErrorMesssge(frame, Textual.SEM_NOTAS_CADASTRADAS, calcularMedia);
+                JItemUI.showErrorMesssge(frame, Textual.SEM_NOTAS_CADASTRADAS, Textual.CALCULAR_MEDIA);
             }
         }
     }
@@ -231,7 +224,7 @@ public class Operacoes {
         String codigo;
 
         if (pilha.empty())
-            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, excluirAluno);
+            JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.EXCLUIR_ALUNO);
         else {
             int tamanho = pilha.size() - 1;
             // Código do aluno que o usuário quer remover
@@ -254,9 +247,9 @@ public class Operacoes {
                     }
                     pilha.pop();
                 }
-                JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, excluirAluno, Icone.EXCLUIR_ALUNO);
+                JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, Textual.EXCLUIR_ALUNO, Icone.EXCLUIR_ALUNO);
             } else {
-                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, excluirAluno);
+                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.EXCLUIR_ALUNO);
             }
         }
     }

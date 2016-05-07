@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.edu.ifms</groupId>
-    <artifactId>StackUI</artifactId>
+    <artifactId>UrsusArctos</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>StackUI</description>
+    <description>UrsusArctos</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
