@@ -20,3 +20,6 @@ Possibilidade de incluir um aluno na pilha e também uma nota ao mesmo, até mes
 
 Quando excluí um aluno da pilha é removido todos os alunos inseridos após o aluno excluído.
 
+### Screenshot
+
+![notebook](img/notebook.png)
