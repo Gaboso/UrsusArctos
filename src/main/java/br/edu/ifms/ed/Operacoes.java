@@ -26,16 +26,18 @@ public class Operacoes {
         else {
             contador = 0;
             codigo = pegaCodigoAluno(frame);
-            tamanho = pilha.size() - 1;
-            while (tamanho != -1) {
-                if (pilha.get(tamanho).getCodigo().equals(codigo)) {
-                    cadastrarNota(pilha.get(tamanho), frame);
-                    contador++;
+            if (codigo != null) {
+                tamanho = pilha.size() - 1;
+                while (tamanho != -1) {
+                    if (pilha.get(tamanho).getCodigo().equals(codigo)) {
+                        cadastrarNota(pilha.get(tamanho), frame);
+                        contador++;
+                    }
+                    tamanho--;
                 }
-                tamanho--;
-            }
-            if (contador == 0) {
-                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CADASTRO_DE_NOTAS);
+                if (contador == 0) {
+                    JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CADASTRO_DE_NOTAS);
+                }
             }
         }
     }
@@ -47,24 +49,29 @@ public class Operacoes {
      * @return Retorna a nota do aluno
      */
     private Aluno cadastrarNota(Aluno aluno, JFrame frame) {
-        double numeroConvertido = 0;
         boolean ok = false;
         ImageIcon icone = Icone.CADASTRAR_NOTA;
 
         do {
-            String codigo = (String) JOptionPane.showInputDialog(null, Textual.INSIRA_NOTA, Textual.CADASTRO_DE_NOTAS,
+            String codigo = (String) JOptionPane.showInputDialog(frame, Textual.INSIRA_NOTA, Textual.CADASTRO_DE_NOTAS,
                     JOptionPane.PLAIN_MESSAGE, icone, null, null);
-            try {
-                codigo = codigo.replaceAll(",", ".");
-                numeroConvertido = Double.parseDouble(codigo);
+            if (codigo != null) {
+                try {
+                    codigo = codigo.replaceAll(",", ".");
+                    double numeroConvertido = Double.parseDouble(codigo);
+                    ok = true;
+                    JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icone);
+                    aluno.setNota(numeroConvertido);
+                } catch (Exception e) {
+                    JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
+                }
+            } else {
                 ok = true;
-            } catch (Exception e) {
-                JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
+                aluno.setNota(null);
             }
         } while (!ok);
 
-        JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icone);
-        aluno.setNota(numeroConvertido);
+
         return aluno;
     }
 
@@ -74,16 +81,19 @@ public class Operacoes {
      * @return código do aluno
      */
     private String pegaCodigoAluno(JFrame frame) {
-        String codigo;
+        String codigo = null;
+        boolean valido = false;
 
-        ImageIcon icone = Icone.CADASTRAR_ALUNO;
-        do {
-            codigo = (String) JOptionPane.showInputDialog(null, Textual.DIGITE_CODIGO_ALUNO, Textual.CODIGO_DO_ALUNO,
-                    JOptionPane.PLAIN_MESSAGE, icone, null, null);
-            if (codigo == null || codigo.isEmpty()) {
+        while (!valido) {
+            codigo = (String) JOptionPane.showInputDialog(frame, Textual.DIGITE_CODIGO_ALUNO, Textual.CODIGO_DO_ALUNO,
+                    JOptionPane.PLAIN_MESSAGE, Icone.CADASTRAR_ALUNO, null, null);
+            if (codigo != null && codigo.isEmpty()) {
+                valido = false;
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, Textual.CODIGO_DO_ALUNO);
+            } else {
+                valido = true;
             }
-        } while (codigo == null || codigo.isEmpty());
+        }
 
         return codigo;
     }
@@ -105,25 +115,27 @@ public class Operacoes {
      */
     public void cadastrandoAluno(JFrame frame) {
         Aluno aluno = new Aluno();
-        cadastrarAluno(aluno, frame);
+        aluno = cadastrarAluno(aluno, frame);
 
-        boolean erro = false;
-        int aux = pilha.size() - 1;
-        while (aux != -1) {
-            if (pilha.get(aux).getCodigo().equals(aluno.getCodigo())) {
-                erro = true;
-                break;
+        if (aluno.getCodigo() != null) {
+            boolean erro = false;
+            int aux = pilha.size() - 1;
+            while (aux != -1) {
+                if (pilha.get(aux).getCodigo().equals(aluno.getCodigo())) {
+                    erro = true;
+                    break;
+                }
+                aux--;
             }
-            aux--;
-        }
 
-        if (erro) {
-            JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
-        } else {
-            // Atribui o valor null pois somente o aluno foi cadastrado e a nota ainda não.
-            aluno.setNota(null);
-            pilha.push(aluno);
-            JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, Icone.CADASTRAR_ALUNO);
+            if (erro) {
+                JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
+            } else {
+                // Atribui o valor null pois somente o aluno foi cadastrado e a nota ainda não.
+                aluno.setNota(null);
+                pilha.push(aluno);
+                JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, Icone.CADASTRAR_ALUNO);
+            }
         }
     }
 
@@ -198,20 +210,22 @@ public class Operacoes {
         else {
             tamanho = pilha.size() - 1;
             codigo = pegaCodigoAluno(frame);
-            contador = 0;
+            if (codigo != null) {
+                contador = 0;
 
-            ImageIcon icone = Icone.PROCURAR_ALUNO;
+                ImageIcon icone = Icone.PROCURAR_ALUNO;
 
-            while (tamanho != -1) {
-                if (pilha.get(tamanho).getCodigo().equals(codigo)) {
-                    contador++;
-                    String texto = Textual.O_ALUNO + pilha.get(tamanho).getCodigo() + Textual.ESTA_CADASTRADO;
-                    JItemUI.showInfoMesssge(frame, texto, Textual.CONSULTA_DE_ALUNOS, icone);
+                while (tamanho != -1) {
+                    if (pilha.get(tamanho).getCodigo().equals(codigo)) {
+                        contador++;
+                        String texto = Textual.O_ALUNO + pilha.get(tamanho).getCodigo() + Textual.ESTA_CADASTRADO;
+                        JItemUI.showInfoMesssge(frame, texto, Textual.CONSULTA_DE_ALUNOS, icone);
+                    }
+                    tamanho--;
                 }
-                tamanho--;
-            }
-            if (contador == 0) {
-                JItemUI.showErrorMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CONSULTA_DE_ALUNOS);
+                if (contador == 0) {
+                    JItemUI.showErrorMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CONSULTA_DE_ALUNOS);
+                }
             }
 
         }
@@ -230,26 +244,28 @@ public class Operacoes {
             // Código do aluno que o usuário quer remover
             codigo = pegaCodigoAluno(frame);
 
-            int cont = 0;
-            // Verifica se o código foi cadastrado
-            while (tamanho != -1) {
-                if (codigo.equals(pilha.get(tamanho).getCodigo()))
-                    cont++;
-                tamanho--;
-            }
-
-            if (cont > 0) {
-                while (!Objects.equals(pilha.peek().getCodigo(), codigo)
-                        || pilha.peek().getCodigo().equals(codigo)) {
-                    if (pilha.peek().getCodigo().equals(codigo)) {
-                        pilha.pop();
-                        break;
-                    }
-                    pilha.pop();
+            if (codigo != null) {
+                int cont = 0;
+                // Verifica se o código foi cadastrado
+                while (tamanho != -1) {
+                    if (codigo.equals(pilha.get(tamanho).getCodigo()))
+                        cont++;
+                    tamanho--;
                 }
-                JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, Textual.EXCLUIR_ALUNO, Icone.EXCLUIR_ALUNO);
-            } else {
-                JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.EXCLUIR_ALUNO);
+
+                if (cont > 0) {
+                    while (!Objects.equals(pilha.peek().getCodigo(), codigo)
+                            || pilha.peek().getCodigo().equals(codigo)) {
+                        if (pilha.peek().getCodigo().equals(codigo)) {
+                            pilha.pop();
+                            break;
+                        }
+                        pilha.pop();
+                    }
+                    JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, Textual.EXCLUIR_ALUNO, Icone.EXCLUIR_ALUNO);
+                } else {
+                    JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.EXCLUIR_ALUNO);
+                }
             }
         }
     }
