@@ -11,9 +11,18 @@ import java.awt.*;
  */
 public class JItemUI {
 
+    /**
+     * Construtor privado
+     */
     private JItemUI() {
     }
 
+    /**
+     * Método para TitledBorder
+     *
+     * @param title - Título que ficara na borda
+     * @return TitledBorder
+     */
     public static TitledBorder titledBorder(String title) {
         LineBorder border = new LineBorder(Cor.SECONDARY_COLOR, 1, true);
         TitledBorder titledBorder = new TitledBorder(border, title);

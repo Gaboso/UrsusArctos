@@ -90,9 +90,8 @@ public class Operacoes {
             if (codigo != null && codigo.isEmpty()) {
                 valido = false;
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, Textual.CODIGO_DO_ALUNO);
-            } else {
+            } else
                 valido = true;
-            }
         }
 
         return codigo;
@@ -210,6 +209,7 @@ public class Operacoes {
         else {
             tamanho = pilha.size() - 1;
             codigo = pegaCodigoAluno(frame);
+
             if (codigo != null) {
                 contador = 0;
 
@@ -223,9 +223,8 @@ public class Operacoes {
                     }
                     tamanho--;
                 }
-                if (contador == 0) {
+                if (contador == 0)
                     JItemUI.showErrorMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.CONSULTA_DE_ALUNOS);
-                }
             }
 
         }
@@ -254,8 +253,7 @@ public class Operacoes {
                 }
 
                 if (cont > 0) {
-                    while (!Objects.equals(pilha.peek().getCodigo(), codigo)
-                            || pilha.peek().getCodigo().equals(codigo)) {
+                    while (!Objects.equals(pilha.peek().getCodigo(), codigo) || pilha.peek().getCodigo().equals(codigo)) {
                         if (pilha.peek().getCodigo().equals(codigo)) {
                             pilha.pop();
                             break;

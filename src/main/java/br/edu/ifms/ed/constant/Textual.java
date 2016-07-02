@@ -47,6 +47,9 @@ public class Textual {
     public static final String CONSULTA = "Consulta";
     public static final String CADASTRAR = "Cadastrar";
 
+    /**
+     * Construtor privado
+     */
     private Textual() {
     }
 }
