@@ -4,17 +4,25 @@ import br.edu.ifms.ed.constant.Textual;
 import br.edu.ifms.ed.model.Aluno;
 import br.edu.ifms.ed.ui.Icone;
 import br.edu.ifms.ed.ui.JItemUI;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.util.Objects;
 import java.util.Stack;
 
+/**
+ * Classe com as operações realizadas com o aluno
+ */
 public class Operacoes {
+
+    private static final Logger LOGGER = Logger.getLogger(Operacoes.class);
 
     private static Stack<Aluno> pilha = new Stack<>();
 
     /**
      * Método para fazer o cadastro da nota do aluno
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      */
     public void cadastroNota(JFrame frame) {
         int tamanho;
@@ -46,6 +54,7 @@ public class Operacoes {
      * Método para receber as notas do usuário
      *
      * @param aluno - Objeto de aluno
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      * @return Retorna a nota do aluno
      */
     private Aluno cadastrarNota(Aluno aluno, JFrame frame) {
@@ -63,6 +72,7 @@ public class Operacoes {
                     JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icone);
                     aluno.setNota(numeroConvertido);
                 } catch (Exception e) {
+                    LOGGER.error(e.getMessage(), e);
                     JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
                 }
             } else {
@@ -78,6 +88,7 @@ public class Operacoes {
     /**
      * Método para receber do usuário o código do aluno
      *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      * @return código do aluno
      */
     private String pegaCodigoAluno(JFrame frame) {
@@ -102,6 +113,7 @@ public class Operacoes {
      * Método para cadastrar os alunos
      *
      * @param aluno - Objeto de aluno
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      * @return retorna o código do aluno igual a uma matricula
      */
     private Aluno cadastrarAluno(Aluno aluno, JFrame frame) {
@@ -112,6 +124,8 @@ public class Operacoes {
 
     /**
      * Método para fazer o cadastro do aluno
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      */
     public void cadastrandoAluno(JFrame frame) {
         Aluno aluno = new Aluno();
@@ -131,7 +145,7 @@ public class Operacoes {
             if (erro) {
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
             } else {
-                // Atribui o valor null pois somente o aluno foi cadastrado e a nota ainda não.
+                // Atribui o valor null, pois somente o aluno foi cadastrado e a nota ainda não.
                 aluno.setNota(null);
                 pilha.push(aluno);
                 JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, Icone.CADASTRAR_ALUNO);
@@ -141,6 +155,8 @@ public class Operacoes {
 
     /**
      * Método para fazer o calculo da media dos alunos
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      */
     public void calcularMedia(JFrame frame) {
         int tamanho;
@@ -178,6 +194,8 @@ public class Operacoes {
 
     /**
      * Método para exibir o aluno
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      */
     public void exibirAlunos(JFrame frame) {
         int tamanho;
@@ -185,21 +203,26 @@ public class Operacoes {
         if (pilha.empty())
             JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.EXIBIR_ALUNOS);
         else {
-            String texto = "";
+            StringBuilder texto = new StringBuilder();
             tamanho = pilha.size() - 1;
             while (tamanho != -1) {
-                texto += (Textual.CODIGO + pilha.get(tamanho).getCodigo() + " ");
+                texto.append(Textual.CODIGO).append(pilha.get(tamanho).getCodigo()).append(" ");
                 if (pilha.get(tamanho).getNota() != null)
-                    texto += (Textual.NOTA + pilha.get(tamanho).getNota() + "\r\n");
+                    texto.append(Textual.NOTA).append(pilha.get(tamanho).getNota()).append("\r\n");
                 else
-                    texto += Textual.SEM_NOTA;
+                    texto.append(Textual.SEM_NOTA);
                 tamanho--;
             }
 
-            JItemUI.showInfoMesssge(frame, texto, Textual.EXIBIR_ALUNOS, Icone.EXIBIR_ALUNO);
+            JItemUI.showInfoMesssge(frame, texto.toString(), Textual.EXIBIR_ALUNOS, Icone.EXIBIR_ALUNO);
         }
     }
 
+    /**
+     * Método para realizar a consulta de um aluno
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
+     */
     public void consultaAluno(JFrame frame) {
         int tamanho;
         int contador;
@@ -233,6 +256,8 @@ public class Operacoes {
 
     /**
      * Método para excluir os alunos
+     *
+     * @param frame - frame pai de onde serão exibidas as mensagens informativas.
      */
     public void excluirAluno(JFrame frame) {
         String codigo;
@@ -269,4 +294,5 @@ public class Operacoes {
             }
         }
     }
+
 }

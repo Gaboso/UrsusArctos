@@ -49,4 +49,5 @@ public class Textual {
 
     private Textual() {
     }
+
 }

@@ -3,7 +3,7 @@ package br.edu.ifms.ed.ui;
 import javax.swing.*;
 
 /**
- * Classe com os icones utilizados
+ * Classe com os ícones utilizados
  */
 public class Icone {
 
@@ -20,4 +20,5 @@ public class Icone {
 
     private Icone() {
     }
+
 }

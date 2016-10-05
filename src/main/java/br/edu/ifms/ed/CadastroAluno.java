@@ -5,25 +5,32 @@ import br.edu.ifms.ed.ui.Cor;
 import br.edu.ifms.ed.ui.Fonte;
 import br.edu.ifms.ed.ui.Icone;
 import br.edu.ifms.ed.ui.JItemUI;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Classe em que inicia a interface visual da aplicação
+ */
 public class CadastroAluno {
 
     private JFrame telaPrincipal;
+    private static final Logger LOGGER = Logger.getLogger(CadastroAluno.class);
 
     /**
-     * Create the application.
+     * Cria a aplicação
      */
     private CadastroAluno() {
         initialize();
     }
 
     /**
-     * Launch the application.
+     * Inicia a aplicação
+     *
+     * @param args - argumentos que podem ser passados pela linha de comando
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -31,13 +38,13 @@ public class CadastroAluno {
                 CadastroAluno window = new CadastroAluno();
                 window.telaPrincipal.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
         });
     }
 
     /**
-     * Initialize the contents of the frame.
+     * Inicializa os conteúdos presentes no frame
      */
     private void initialize() {
         telaPrincipal = new JFrame();
@@ -149,4 +156,5 @@ public class CadastroAluno {
             }
         });
     }
+
 }
