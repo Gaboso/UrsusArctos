@@ -1,10 +1,10 @@
 package br.edu.ifms.ed;
 
 import br.edu.ifms.ed.constant.Textual;
-import br.edu.ifms.ed.ui.Cor;
-import br.edu.ifms.ed.ui.Fonte;
-import br.edu.ifms.ed.ui.Icone;
 import br.edu.ifms.ed.ui.JItemUI;
+import br.edu.ifms.ed.ui.UAColor;
+import br.edu.ifms.ed.ui.UAFont;
+import br.edu.ifms.ed.ui.UAIcon;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -12,31 +12,23 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Classe em que inicia a interface visual da aplicação
- */
 public class CadastroAluno {
 
-    private JFrame telaPrincipal;
+    private JFrame mainFrame;
     private static final Logger LOGGER = Logger.getLogger(CadastroAluno.class);
 
-    /**
-     * Cria a aplicação
-     */
     private CadastroAluno() {
         initialize();
     }
 
     /**
-     * Inicia a aplicação
-     *
-     * @param args - argumentos que podem ser passados pela linha de comando
+     * Run application
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 CadastroAluno window = new CadastroAluno();
-                window.telaPrincipal.setVisible(true);
+                window.mainFrame.setVisible(true);
             } catch (Exception e) {
                 LOGGER.error(e.getMessage(), e);
             }
@@ -44,115 +36,115 @@ public class CadastroAluno {
     }
 
     /**
-     * Inicializa os conteúdos presentes no frame
+     * Initializes the contents in frame
      */
     private void initialize() {
-        telaPrincipal = new JFrame();
-        telaPrincipal.getContentPane().setBackground(Cor.PRIMARY_COLOR);
-        telaPrincipal.setResizable(false);
-        telaPrincipal.getContentPane().setFont(Fonte.PRIMARY_FONT);
-        telaPrincipal.getContentPane().setMaximumSize(new Dimension(400, 400));
-        telaPrincipal.setIconImage(Icone.LOGO.getImage());
-        telaPrincipal.setTitle(Textual.TITLE_VERSION);
-        telaPrincipal.setBounds(100, 100, 339, 530);
-        telaPrincipal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        telaPrincipal.getContentPane().setLayout(null);
+        mainFrame = new JFrame();
+        mainFrame.getContentPane().setBackground(UAColor.PRIMARY_COLOR);
+        mainFrame.setResizable(false);
+        mainFrame.getContentPane().setFont(UAFont.PRIMARY_FONT);
+        mainFrame.getContentPane().setMaximumSize(new Dimension(400, 400));
+        mainFrame.setIconImage(UAIcon.LOGO.getImage());
+        mainFrame.setTitle(Textual.TITLE_VERSION);
+        mainFrame.setBounds(100, 100, 339, 530);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainFrame.getContentPane().setLayout(null);
 
-        JButton botaoCalcularMedia = JItemUI.button(Textual.CALCULAR_MEDIA, Cor.BLUE_GREEN, "calculator",
-                Cor.BLACK, Textual.CALCULAR_MEDIA_TOOLTIP);
-        botaoCalcularMedia.setBounds(61, 390, 208, 41);
-        botaoCalcularMedia.addMouseListener(new MouseAdapter() {
+        JButton buttonCalculateGradeAverage = JItemUI.button(Textual.CALCULAR_MEDIA, UAColor.BLUE_GREEN, "calculator",
+                UAColor.BLACK, Textual.CALCULAR_MEDIA_TOOLTIP);
+        buttonCalculateGradeAverage.setBounds(61, 390, 208, 41);
+        buttonCalculateGradeAverage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.calcularMedia(telaPrincipal);
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.calculateGradeAverage();
             }
         });
-        telaPrincipal.getContentPane().add(botaoCalcularMedia);
+        mainFrame.getContentPane().add(buttonCalculateGradeAverage);
 
-        JButton botaoExcluirAluno = JItemUI.button(Textual.EXCLUIR_ALUNO, Cor.RED, "trash",
-                Cor.BLACK, Textual.EXCLUIR_ALUNO_TOOLTIP);
-        botaoExcluirAluno.setBounds(61, 438, 208, 42);
-        botaoExcluirAluno.addMouseListener(new MouseAdapter() {
+        JButton buttonRemoveStudent = JItemUI.button(Textual.EXCLUIR_ALUNO, UAColor.RED, "trash",
+                UAColor.BLACK, Textual.EXCLUIR_ALUNO_TOOLTIP);
+        buttonRemoveStudent.setBounds(61, 438, 208, 42);
+        buttonRemoveStudent.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.excluirAluno(telaPrincipal);
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.remove();
             }
         });
-        telaPrincipal.getContentPane().add(botaoExcluirAluno);
+        mainFrame.getContentPane().add(buttonRemoveStudent);
 
-        JLabel textoCadastroDeAlunos = new JLabel(Textual.TITLE);
-        textoCadastroDeAlunos.setFont(new Font("tahoma", Font.BOLD, 22));
-        textoCadastroDeAlunos.setBounds(0, 11, 337, 54);
-        textoCadastroDeAlunos.setIcon(Icone.LOGO);
-        textoCadastroDeAlunos.setToolTipText(Textual.CADASTRAR_ATRAVES_DE_PILHA);
-        textoCadastroDeAlunos.setHorizontalAlignment(SwingConstants.CENTER);
-        textoCadastroDeAlunos.setForeground(Cor.BROWN);
-        telaPrincipal.getContentPane().add(textoCadastroDeAlunos);
+        JLabel title = new JLabel(Textual.TITLE);
+        title.setFont(new Font("tahoma", Font.BOLD, 22));
+        title.setBounds(0, 11, 337, 54);
+        title.setIcon(UAIcon.LOGO);
+        title.setToolTipText(Textual.CADASTRAR_ATRAVES_DE_PILHA);
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setForeground(UAColor.BROWN);
+        mainFrame.getContentPane().add(title);
 
-        JPanel painelInserir = new JPanel();
-        painelInserir.setBackground(Cor.PRIMARY_COLOR);
-        painelInserir.setBounds(51, 66, 230, 145);
-        painelInserir.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        painelInserir.setFont(new Font("consolas", Font.PLAIN, 15));
-        painelInserir.setForeground(Cor.BLACK);
-        painelInserir.setBorder(JItemUI.titledBorder(Textual.CADASTRAR));
-        telaPrincipal.getContentPane().add(painelInserir);
-        painelInserir.setLayout(null);
+        JPanel panelAdd = new JPanel();
+        panelAdd.setBackground(UAColor.PRIMARY_COLOR);
+        panelAdd.setBounds(51, 66, 230, 145);
+        panelAdd.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        panelAdd.setFont(new Font("consolas", Font.PLAIN, 15));
+        panelAdd.setForeground(UAColor.BLACK);
+        panelAdd.setBorder(JItemUI.titledBorder(Textual.CADASTRAR));
+        mainFrame.getContentPane().add(panelAdd);
+        panelAdd.setLayout(null);
 
-        JButton botaoCadastrarAluno = JItemUI.button(Textual.CADASTRAR_ALUNO, Cor.PURPLE, "user-detail",
-                Cor.BLACK, Textual.CADASTRAR_ALUNO_TOOLTIP);
-        botaoCadastrarAluno.setBounds(10, 30, 208, 41);
-        painelInserir.add(botaoCadastrarAluno);
-        botaoCadastrarAluno.addMouseListener(new MouseAdapter() {
+        JButton buttonAddStudent = JItemUI.button(Textual.CADASTRAR_ALUNO, UAColor.PURPLE, "user-detail",
+                UAColor.BLACK, Textual.CADASTRAR_ALUNO_TOOLTIP);
+        buttonAddStudent.setBounds(10, 30, 208, 41);
+        panelAdd.add(buttonAddStudent);
+        buttonAddStudent.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.cadastrandoAluno(telaPrincipal);
-            }
-        });
-
-        JButton botaoCadastrarNota = JItemUI.button(Textual.CADASTRAR_NOTA, Cor.BLUE, "pencil",
-                Cor.BLACK, Textual.CADASTRAR_NOTA_TOOLTIP);
-        botaoCadastrarNota.setBounds(10, 82, 208, 41);
-        painelInserir.add(botaoCadastrarNota);
-        botaoCadastrarNota.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.cadastroNota(telaPrincipal);
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.addStudent();
             }
         });
 
-        JPanel painelConsulta = new JPanel();
-        painelConsulta.setBackground(Cor.PRIMARY_COLOR);
-        painelConsulta.setBounds(51, 223, 230, 146);
-        painelConsulta.setBorder(JItemUI.titledBorder(Textual.CONSULTA));
-        telaPrincipal.getContentPane().add(painelConsulta);
-        painelConsulta.setLayout(null);
-
-        JButton botaoConsultarAluno = JItemUI.button(Textual.CONSULTAR_ALUNO, Cor.ORANGE, "search",
-                Cor.BLACK, Textual.CONSULTAR_ALUNO_TOOLTIP);
-        botaoConsultarAluno.setBounds(14, 30, 204, 41);
-        painelConsulta.add(botaoConsultarAluno);
-        botaoConsultarAluno.addMouseListener(new MouseAdapter() {
+        JButton buttonAddGrade = JItemUI.button(Textual.CADASTRAR_NOTA, UAColor.BLUE, "pencil",
+                UAColor.BLACK, Textual.CADASTRAR_NOTA_TOOLTIP);
+        buttonAddGrade.setBounds(10, 82, 208, 41);
+        panelAdd.add(buttonAddGrade);
+        buttonAddGrade.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.consultaAluno(telaPrincipal);
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.addGrade();
             }
         });
 
-        JButton botaoExibirAlunos = JItemUI.button(Textual.EXIBIR_ALUNOS, Cor.YELLOW, "student",
-                Cor.BLACK, Textual.EXIBIR_ALUNOS_TOOLTIP);
-        botaoExibirAlunos.setBounds(14, 82, 204, 41);
-        painelConsulta.add(botaoExibirAlunos);
-        botaoExibirAlunos.addMouseListener(new MouseAdapter() {
+        JPanel panelSearch = new JPanel();
+        panelSearch.setBackground(UAColor.PRIMARY_COLOR);
+        panelSearch.setBounds(51, 223, 230, 146);
+        panelSearch.setBorder(JItemUI.titledBorder(Textual.CONSULTA));
+        mainFrame.getContentPane().add(panelSearch);
+        panelSearch.setLayout(null);
+
+        JButton buttonSearchStudent = JItemUI.button(Textual.CONSULTAR_ALUNO, UAColor.ORANGE, "search",
+                UAColor.BLACK, Textual.CONSULTAR_ALUNO_TOOLTIP);
+        buttonSearchStudent.setBounds(14, 30, 204, 41);
+        panelSearch.add(buttonSearchStudent);
+        buttonSearchStudent.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                Operacoes operacoes = new Operacoes();
-                operacoes.exibirAlunos(telaPrincipal);
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.searchStudent();
+            }
+        });
+
+        JButton buttonShowStudent = JItemUI.button(Textual.EXIBIR_ALUNOS, UAColor.YELLOW, "student",
+                UAColor.BLACK, Textual.EXIBIR_ALUNOS_TOOLTIP);
+        buttonShowStudent.setBounds(14, 82, 204, 41);
+        panelSearch.add(buttonShowStudent);
+        buttonShowStudent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                StudentBO studentBO = new StudentBO(mainFrame);
+                studentBO.showAll();
             }
         });
     }

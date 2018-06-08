@@ -16,9 +16,9 @@ Projeto foi apresentado na disciplina de estrutura de dados como estudo sobre pi
 
 Interface gráfica para exemplificar o uso de pilha (_Stack_) no Java.
 
-Possibilidade de incluir um aluno na pilha e também uma nota ao mesmo, até mesmo calcular a média da turma.
+Possibilidade de incluir um student na pilha e também uma grade ao mesmo, até mesmo calcular a média da turma.
 
-Quando excluí um aluno da pilha é removido todos os alunos inseridos após o aluno excluído.
+Quando excluí um student da pilha é removido todos os alunos inseridos após o student excluído.
 
 ### Screenshot
 
