@@ -1,5 +1,7 @@
 # Ursus Arctos
 
+[![forthebadge](https://forthebadge.com/images/badges/reading-6th-grade-level.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
+
 ![logotipo](img/logo_256.png)
 
 -----
@@ -22,4 +24,4 @@ Run the __`build.bat`__ file for _Windows_ or __`build.sh`__ for _Linux_, both a
 
 ## Screenshot
 
-![notebook](img/notebook.png)
+![screenshot](img/screenshot.png)
