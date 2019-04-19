@@ -1,11 +1,8 @@
 package br.edu.ifms.ed.constant;
 
-/**
- * Classe com o conteúdo textual utilizado na aplicação
- */
 public class Textual {
 
-    private static final String VERSION = "1.0";
+    private static final String VERSION = "1.1.0";
     public static final String TITLE = "Ursus Arctos";
     public static final String TITLE_VERSION = TITLE + " - " + VERSION;
     public static final String CALCULAR_MEDIA = "Calcular média";
@@ -52,4 +49,5 @@ public class Textual {
      */
     private Textual() {
     }
+
 }
