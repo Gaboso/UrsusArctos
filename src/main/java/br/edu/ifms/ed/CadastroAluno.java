@@ -5,39 +5,34 @@ import br.edu.ifms.ed.ui.JItemUI;
 import br.edu.ifms.ed.ui.UAColor;
 import br.edu.ifms.ed.ui.UAFont;
 import br.edu.ifms.ed.ui.UAIcon;
-import org.apache.log4j.Logger;
+import lombok.extern.java.Log;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@Log
 public class CadastroAluno {
 
     private JFrame mainFrame;
-    private static final Logger LOGGER = Logger.getLogger(CadastroAluno.class);
 
     private CadastroAluno() {
         initialize();
     }
 
-    /**
-     * Run application
-     */
+
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 CadastroAluno window = new CadastroAluno();
                 window.mainFrame.setVisible(true);
             } catch (Exception e) {
-                LOGGER.error(e.getMessage(), e);
+                log.severe(e.getMessage());
             }
         });
     }
 
-    /**
-     * Initializes the contents in frame
-     */
     private void initialize() {
         mainFrame = new JFrame();
         mainFrame.getContentPane().setBackground(UAColor.PRIMARY_COLOR);

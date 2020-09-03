@@ -4,18 +4,14 @@ import br.edu.ifms.ed.constant.Textual;
 import br.edu.ifms.ed.model.Student;
 import br.edu.ifms.ed.ui.JItemUI;
 import br.edu.ifms.ed.ui.UAIcon;
-import org.apache.log4j.Logger;
+import lombok.extern.java.Log;
 
 import javax.swing.*;
 import java.util.Objects;
 import java.util.Stack;
 
-/**
- * Classe com as operações realizadas com o aluno
- */
+@Log
 public class StudentBO {
-
-    private static final Logger LOGGER = Logger.getLogger(StudentBO.class);
 
     private static Stack<Student> students = new Stack<>();
 
@@ -65,7 +61,7 @@ public class StudentBO {
                     isOK = true;
                     JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icon);
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage(), e);
+                    log.severe(e.getMessage());
                     JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
                 }
             } else {
@@ -114,7 +110,6 @@ public class StudentBO {
             if (erro) {
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
             } else {
-                // Atribui o valor null, pois somente o student foi cadastrado e a nota ainda não.
                 student.setGrade(null);
                 students.push(student);
                 JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, UAIcon.CADASTRAR_ALUNO);
