@@ -4,13 +4,13 @@ import br.edu.ifms.ed.constant.Textual;
 import br.edu.ifms.ed.model.Student;
 import br.edu.ifms.ed.ui.JItemUI;
 import br.edu.ifms.ed.ui.UAIcon;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.util.Objects;
 import java.util.Stack;
 
-@Log
+@Slf4j
 public class StudentBO {
 
     private static Stack<Student> students = new Stack<>();
@@ -61,7 +61,7 @@ public class StudentBO {
                     isOK = true;
                     JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icon);
                 } catch (Exception e) {
-                    log.severe(e.getMessage());
+                    log.error(e.getMessage());
                     JItemUI.showErrorMesssge(frame, Textual.NOTA_INVALIDA, Textual.CADASTRO_DE_NOTAS);
                 }
             } else {

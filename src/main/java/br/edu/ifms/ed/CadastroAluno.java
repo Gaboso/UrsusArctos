@@ -5,14 +5,14 @@ import br.edu.ifms.ed.ui.JItemUI;
 import br.edu.ifms.ed.ui.UAColor;
 import br.edu.ifms.ed.ui.UAFont;
 import br.edu.ifms.ed.ui.UAIcon;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-@Log
+@Slf4j
 public class CadastroAluno {
 
     private JFrame mainFrame;
@@ -28,7 +28,7 @@ public class CadastroAluno {
                 CadastroAluno window = new CadastroAluno();
                 window.mainFrame.setVisible(true);
             } catch (Exception e) {
-                log.severe(e.getMessage());
+                log.error(e.getMessage());
             }
         });
     }
