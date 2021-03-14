@@ -8,7 +8,7 @@
 
 ## About
 
-Project that uses _Swing_ to construct the graphical interface and the stack structure to store student data.
+Project that uses _Swing_ to construct the graphical interface, and the stack structure to store student data.
 
 Project was presented in the discipline of data structure as a study on stacks.
 

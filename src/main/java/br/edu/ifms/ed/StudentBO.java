@@ -49,14 +49,14 @@ public class StudentBO {
 
     private Student addGrade(Student student) {
         boolean isOK = false;
-        ImageIcon icon = UAIcon.CADASTRAR_NOTA;
+        ImageIcon icon = UAIcon.ADD_GRADE;
 
         do {
             String grade = (String) JOptionPane.showInputDialog(frame, Textual.INSIRA_NOTA, Textual.CADASTRO_DE_NOTAS,
-                    JOptionPane.PLAIN_MESSAGE, icon, null, null);
+                JOptionPane.PLAIN_MESSAGE, icon, null, null);
             if (grade != null) {
                 try {
-                    grade = grade.replaceAll(",", ".");
+                    grade = grade.replace(",", ".");
                     student.setGrade(Double.parseDouble(grade));
                     isOK = true;
                     JItemUI.showInfoMesssge(frame, Textual.NOTA_CADASTRADA, Textual.CADASTRO_DE_NOTAS, icon);
@@ -79,8 +79,12 @@ public class StudentBO {
         boolean isOK = false;
 
         while (!isOK) {
-            id = (String) JOptionPane.showInputDialog(frame, Textual.DIGITE_CODIGO_ALUNO, Textual.CODIGO_DO_ALUNO,
-                    JOptionPane.PLAIN_MESSAGE, UAIcon.CADASTRAR_ALUNO, null, null);
+            id = (String) JOptionPane.showInputDialog(frame,
+                Textual.DIGITE_CODIGO_ALUNO,
+                Textual.CODIGO_DO_ALUNO,
+                JOptionPane.PLAIN_MESSAGE,
+                UAIcon.ADD_STUDENT, null, null);
+
             if (id != null && id.isEmpty()) {
                 isOK = false;
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_INVALIDO, Textual.CODIGO_DO_ALUNO);
@@ -97,22 +101,22 @@ public class StudentBO {
         student.setId(getStudentID());
 
         if (student.getId() != null) {
-            boolean erro = false;
-            int aux = students.size() - 1;
-            while (aux != -1) {
-                if (students.get(aux).getId().equals(student.getId())) {
-                    erro = true;
+            boolean alreadyExists = false;
+            int position = students.size() - 1;
+            while (position != -1) {
+                if (students.get(position).getId().equals(student.getId())) {
+                    alreadyExists = true;
                     break;
                 }
-                aux--;
+                position--;
             }
 
-            if (erro) {
+            if (alreadyExists) {
                 JItemUI.showErrorMesssge(frame, Textual.CODIGO_JA_EXISTENTE, Textual.CADASTRO_DO_ALUNO);
             } else {
                 student.setGrade(null);
                 students.push(student);
-                JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, UAIcon.CADASTRAR_ALUNO);
+                JItemUI.showInfoMesssge(frame, Textual.ALUNO_CADASTRADO, Textual.CADASTRO_DO_ALUNO, UAIcon.ADD_STUDENT);
             }
         }
     }
@@ -136,7 +140,7 @@ public class StudentBO {
                 size--;
             }
 
-            ImageIcon icon = UAIcon.CALCULAR_MEDIA;
+            ImageIcon icon = UAIcon.CALC_AVERAGE;
 
             if (counter != 0) {
                 average /= counter;
@@ -170,7 +174,7 @@ public class StudentBO {
                 size--;
             }
 
-            JItemUI.showInfoMesssge(frame, report.toString(), Textual.EXIBIR_ALUNOS, UAIcon.EXIBIR_ALUNO);
+            JItemUI.showInfoMesssge(frame, report.toString(), Textual.EXIBIR_ALUNOS, UAIcon.SHOW_STUDENT);
         }
     }
 
@@ -187,7 +191,7 @@ public class StudentBO {
             if (id != null) {
                 counter = 0;
 
-                ImageIcon icon = UAIcon.PROCURAR_ALUNO;
+                ImageIcon icon = UAIcon.SEARCH_STUDENT;
 
                 while (size != -1) {
                     if (students.get(size).getId().equals(id)) {
@@ -208,9 +212,9 @@ public class StudentBO {
     public void remove() {
         String id;
 
-        if (students.empty())
+        if (students.empty()) {
             JItemUI.showErrorMesssge(frame, Textual.SEM_ALUNOS_CADASTRADOS, Textual.EXCLUIR_ALUNO);
-        else {
+        } else {
             int size = students.size() - 1;
             id = getStudentID();
 
@@ -233,7 +237,7 @@ public class StudentBO {
                         students.pop();
                     }
 
-                    JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, Textual.EXCLUIR_ALUNO, UAIcon.EXCLUIR_ALUNO);
+                    JItemUI.showInfoMesssge(frame, Textual.ALUNO_EXCLUIDO, Textual.EXCLUIR_ALUNO, UAIcon.REMOVE_STUDENT);
                 } else {
                     JItemUI.showWarnMesssge(frame, Textual.ALUNO_NAO_ENCONTRADO, Textual.EXCLUIR_ALUNO);
                 }

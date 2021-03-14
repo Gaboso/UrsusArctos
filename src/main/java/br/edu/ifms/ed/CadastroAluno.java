@@ -46,7 +46,7 @@ public class CadastroAluno {
         mainFrame.getContentPane().setLayout(null);
 
         JButton buttonCalculateGradeAverage = JItemUI.button(Textual.CALCULAR_MEDIA, UAColor.BLUE_GREEN, "calculator",
-                UAColor.BLACK, Textual.CALCULAR_MEDIA_TOOLTIP);
+            UAColor.BLACK, Textual.CALCULAR_MEDIA_TOOLTIP);
         buttonCalculateGradeAverage.setBounds(61, 390, 208, 41);
         buttonCalculateGradeAverage.addMouseListener(new MouseAdapter() {
             @Override
@@ -58,7 +58,7 @@ public class CadastroAluno {
         mainFrame.getContentPane().add(buttonCalculateGradeAverage);
 
         JButton buttonRemoveStudent = JItemUI.button(Textual.EXCLUIR_ALUNO, UAColor.RED, "trash",
-                UAColor.BLACK, Textual.EXCLUIR_ALUNO_TOOLTIP);
+            UAColor.BLACK, Textual.EXCLUIR_ALUNO_TOOLTIP);
         buttonRemoveStudent.setBounds(61, 438, 208, 42);
         buttonRemoveStudent.addMouseListener(new MouseAdapter() {
             @Override
@@ -89,7 +89,7 @@ public class CadastroAluno {
         panelAdd.setLayout(null);
 
         JButton buttonAddStudent = JItemUI.button(Textual.CADASTRAR_ALUNO, UAColor.PURPLE, "user-detail",
-                UAColor.BLACK, Textual.CADASTRAR_ALUNO_TOOLTIP);
+            UAColor.BLACK, Textual.CADASTRAR_ALUNO_TOOLTIP);
         buttonAddStudent.setBounds(10, 30, 208, 41);
         panelAdd.add(buttonAddStudent);
         buttonAddStudent.addMouseListener(new MouseAdapter() {
@@ -101,7 +101,7 @@ public class CadastroAluno {
         });
 
         JButton buttonAddGrade = JItemUI.button(Textual.CADASTRAR_NOTA, UAColor.BLUE, "pencil",
-                UAColor.BLACK, Textual.CADASTRAR_NOTA_TOOLTIP);
+            UAColor.BLACK, Textual.CADASTRAR_NOTA_TOOLTIP);
         buttonAddGrade.setBounds(10, 82, 208, 41);
         panelAdd.add(buttonAddGrade);
         buttonAddGrade.addMouseListener(new MouseAdapter() {
@@ -120,7 +120,7 @@ public class CadastroAluno {
         panelSearch.setLayout(null);
 
         JButton buttonSearchStudent = JItemUI.button(Textual.CONSULTAR_ALUNO, UAColor.ORANGE, "search",
-                UAColor.BLACK, Textual.CONSULTAR_ALUNO_TOOLTIP);
+            UAColor.BLACK, Textual.CONSULTAR_ALUNO_TOOLTIP);
         buttonSearchStudent.setBounds(14, 30, 204, 41);
         panelSearch.add(buttonSearchStudent);
         buttonSearchStudent.addMouseListener(new MouseAdapter() {
@@ -132,7 +132,7 @@ public class CadastroAluno {
         });
 
         JButton buttonShowStudent = JItemUI.button(Textual.EXIBIR_ALUNOS, UAColor.YELLOW, "student",
-                UAColor.BLACK, Textual.EXIBIR_ALUNOS_TOOLTIP);
+            UAColor.BLACK, Textual.EXIBIR_ALUNOS_TOOLTIP);
         buttonShowStudent.setBounds(14, 82, 204, 41);
         panelSearch.add(buttonShowStudent);
         buttonShowStudent.addMouseListener(new MouseAdapter() {
