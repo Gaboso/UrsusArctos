@@ -12,7 +12,6 @@ public class UAIcon {
     public static final ImageIcon SEARCH_STUDENT = JItemUI.getImage("search");
     public static final ImageIcon LOGO = JItemUI.getImage("logo");
     public static final ImageIcon ERROR = JItemUI.getImage("error");
-    public static final ImageIcon INFO = JItemUI.getImage("info");
     public static final ImageIcon WARN = JItemUI.getImage("warn");
 
     private UAIcon() {
