@@ -1,9 +1,9 @@
 package br.edu.ifms.ed.ui;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 
 public class JItemUI {
 
@@ -11,7 +11,7 @@ public class JItemUI {
     }
 
     public static TitledBorder titledBorder(String title) {
-        LineBorder border = new LineBorder(UAColor.SECONDARY_COLOR, 1, true);
+        LineBorder border = new LineBorder(Color.GRAY);
         TitledBorder titledBorder = new TitledBorder(border, title);
         titledBorder.setTitleJustification(TitledBorder.CENTER);
         titledBorder.setTitlePosition(TitledBorder.TOP);
@@ -19,11 +19,9 @@ public class JItemUI {
         return titledBorder;
     }
 
-    public static JButton button(String text, Color colorButton, String imageName, Color colorText, String tooltip) {
+    public static JButton button(String text, String imageName, String tooltip) {
         JButton jButton = new JButton(text);
 
-        jButton.setBackground(colorButton);
-        jButton.setForeground(colorText);
         jButton.setIcon(getImage(imageName));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setToolTipText(tooltip);

@@ -2,9 +2,7 @@ package br.edu.ifms.ed.constant;
 
 public class Textual {
 
-    private static final String VERSION = "1.1.0";
     public static final String TITLE = "Ursus Arctos";
-    public static final String TITLE_VERSION = TITLE + " - " + VERSION;
     public static final String CALCULAR_MEDIA = "Calcular média";
     public static final String EXCLUIR_ALUNO = "Excluir aluno";
     public static final String CADASTRAR_ALUNO = "Cadastrar Aluno";
@@ -17,11 +15,9 @@ public class Textual {
     public static final String CADASTRAR_ALUNO_TOOLTIP = "Clique aqui cadastrar um aluno";
     public static final String EXCLUIR_ALUNO_TOOLTIP = "Clique aqui excluir um aluno";
     public static final String CALCULAR_MEDIA_TOOLTIP = "Clique  aqui para calcular a média";
-
     public static final String CADASTRO_DO_ALUNO = "Cadastro do aluno";
     public static final String CADASTRO_DE_NOTAS = "Cadastro de notas";
     public static final String CODIGO_DO_ALUNO = "Código do aluno";
-    public static final String CADASTRAR_ATRAVES_DE_PILHA = "Cadastro de alunos através de pilha";
     public static final String ALUNO_NAO_ENCONTRADO = "Aluno não encontrado";
     public static final String INSIRA_NOTA = "Insira uma nota para o aluno: ";
     public static final String NOTA_INVALIDA = "Não foi possível inserir a nota";
@@ -30,7 +26,6 @@ public class Textual {
     public static final String CODIGO_INVALIDO = "O código do aluno não pode ser em branco ou nulo";
     public static final String CODIGO_JA_EXISTENTE = "Já possui um aluno cadastrado com esse código";
     public static final String ALUNO_CADASTRADO = "Aluno cadastrado";
-    public static final String MEDIA_ALUNO = "Média do aluno: ";
     public static final String MEDIA_ALUNOS = "Média dos alunos: ";
     public static final String SEM_NOTAS_CADASTRADAS = "Não existem notas cadastradas!";
     public static final String CODIGO = "Código: ";
@@ -39,10 +34,13 @@ public class Textual {
     public static final String CONSULTA_DE_ALUNOS = "Consulta de alunos";
     public static final String O_ALUNO = "O aluno ";
     public static final String ESTA_CADASTRADO = " está cadastrado";
+    public static final String NAO_ESTA_CADASTRADO = " não está cadastrado";
     public static final String ALUNO_EXCLUIDO = "Aluno excluído";
     public static final String SEM_ALUNOS_CADASTRADOS = "Não existem alunos cadastrados!";
     public static final String CONSULTA = "Consulta";
     public static final String CADASTRAR = "Cadastrar";
+    private static final String VERSION = "1.2.0";
+    public static final String TITLE_VERSION = TITLE + " - " + VERSION;
 
     private Textual() {
     }
