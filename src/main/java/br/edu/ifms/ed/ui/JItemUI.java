@@ -11,7 +11,7 @@ public class JItemUI {
     }
 
     public static TitledBorder titledBorder(String title) {
-        LineBorder border = new LineBorder(UAColor.SECONDARY_COLOR, 1, true);
+        LineBorder border = new LineBorder(Color.GRAY);
         TitledBorder titledBorder = new TitledBorder(border, title);
         titledBorder.setTitleJustification(TitledBorder.CENTER);
         titledBorder.setTitlePosition(TitledBorder.TOP);
@@ -19,10 +19,9 @@ public class JItemUI {
         return titledBorder;
     }
 
-    public static JButton button(String text, Color colorButton, String imageName, String tooltip) {
+    public static JButton button(String text, String imageName, String tooltip) {
         JButton jButton = new JButton(text);
 
-        jButton.setBackground(colorButton);
         jButton.setIcon(getImage(imageName));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setToolTipText(tooltip);

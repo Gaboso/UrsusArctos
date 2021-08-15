@@ -16,7 +16,7 @@ public class StudentStack {
     private static final Stack<Student> students = new Stack<>();
 
     public void addGrade(String studentID, String grade) throws NoStudentException, StudentNotFoundException, InvalidGradeException {
-        if (students.empty()) {
+        if (isEmpty()) {
             throw new NoStudentException();
         }
 
@@ -36,6 +36,10 @@ public class StudentStack {
                 throw new StudentNotFoundException();
             }
         }
+    }
+
+    public boolean isEmpty() {
+        return students.isEmpty();
     }
 
     private void addGradeToStudent(Student student, String grade) throws InvalidGradeException {
@@ -73,7 +77,7 @@ public class StudentStack {
     }
 
     public double calculateGradeAverage() throws NoStudentException, NoGradeException {
-        if (students.empty()) {
+        if (isEmpty()) {
             throw new NoStudentException();
         }
 
@@ -98,7 +102,7 @@ public class StudentStack {
     }
 
     public String getAllStudents() throws NoStudentException {
-        if (students.empty()) {
+        if (isEmpty()) {
             throw new NoStudentException();
         }
 
@@ -125,7 +129,7 @@ public class StudentStack {
     }
 
     public boolean isPresent(String studentID) throws NoStudentException {
-        if (students.empty()) {
+        if (isEmpty()) {
             throw new NoStudentException();
         }
 
@@ -145,7 +149,7 @@ public class StudentStack {
     }
 
     public void remove(String studentID) throws NoStudentException, StudentNotFoundException {
-        if (students.empty()) {
+        if (isEmpty()) {
             throw new NoStudentException();
         }
 

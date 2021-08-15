@@ -18,7 +18,6 @@ public class Textual {
     public static final String CADASTRO_DO_ALUNO = "Cadastro do aluno";
     public static final String CADASTRO_DE_NOTAS = "Cadastro de notas";
     public static final String CODIGO_DO_ALUNO = "Código do aluno";
-    public static final String CADASTRAR_ATRAVES_DE_PILHA = "Cadastro de alunos através de pilha";
     public static final String ALUNO_NAO_ENCONTRADO = "Aluno não encontrado";
     public static final String INSIRA_NOTA = "Insira uma nota para o aluno: ";
     public static final String NOTA_INVALIDA = "Não foi possível inserir a nota";
@@ -40,7 +39,7 @@ public class Textual {
     public static final String SEM_ALUNOS_CADASTRADOS = "Não existem alunos cadastrados!";
     public static final String CONSULTA = "Consulta";
     public static final String CADASTRAR = "Cadastrar";
-    private static final String VERSION = "1.1.0";
+    private static final String VERSION = "1.2.0";
     public static final String TITLE_VERSION = TITLE + " - " + VERSION;
 
     private Textual() {

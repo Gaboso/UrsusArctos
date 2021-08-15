@@ -1,4 +1,4 @@
 @echo off
-echo --- Building UrsusArctos ---
+echo --- Building Ursus Arctos ---
 
 mvn clean install
