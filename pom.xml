@@ -35,7 +35,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <slf4j.version>2.0.0-alpha4</slf4j.version>
         <flatlaf.version>1.5</flatlaf.version>
-        <junit.version>5.5.2</junit.version>
+        <junit.version>5.7.2</junit.version>
     </properties>
 
     <dependencies>
@@ -141,7 +141,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.0.0-M5</version>
             </plugin>
         </plugins>
     </build>
