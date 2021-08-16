@@ -7,13 +7,19 @@ import br.edu.ifms.ed.exception.NoGradeException;
 import br.edu.ifms.ed.exception.NoStudentException;
 import br.edu.ifms.ed.exception.StudentNotFoundException;
 import br.edu.ifms.ed.model.Student;
+import lombok.Getter;
 
 import java.util.Objects;
 import java.util.Stack;
 
 public class StudentStack {
 
-    private static final Stack<Student> students = new Stack<>();
+    @Getter
+    private final Stack<Student> students;
+
+    public StudentStack() {
+        students = new Stack<>();
+    }
 
     public void addGrade(String studentID, String grade) throws NoStudentException, StudentNotFoundException, InvalidGradeException {
         if (isEmpty()) {
@@ -149,23 +155,9 @@ public class StudentStack {
     }
 
     public void remove(String studentID) throws NoStudentException, StudentNotFoundException {
-        if (isEmpty()) {
-            throw new NoStudentException();
-        }
+        boolean isPresent = isPresent(studentID);
 
-        int currentPosition = students.size() - 1;
-
-        int counter = 0;
-        // Verifica se o código foi cadastrado
-        while (currentPosition != -1) {
-            String currentID = students.get(currentPosition).getId();
-            if (studentID.equals(currentID)) {
-                counter++;
-            }
-            currentPosition--;
-        }
-
-        if (counter == 0) {
+        if (!isPresent) {
             throw new StudentNotFoundException();
         }
 
