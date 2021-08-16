@@ -1,6 +1,6 @@
 # Ursus Arctos
 
-[![forthebadge](https://forthebadge.com/images/badges/reading-6th-grade-level.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
+[![Maven Java CI](https://github.com/Gaboso/UrsusArctos/actions/workflows/maven.yml/badge.svg)](https://github.com/Gaboso/UrsusArctos/actions/workflows/maven.yml) [![CodeQL](https://github.com/Gaboso/UrsusArctos/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Gaboso/UrsusArctos/actions/workflows/codeql-analysis.yml)
 
 ![logotipo](img/logo_256.png)
 
