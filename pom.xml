@@ -6,20 +6,14 @@
 
     <groupId>br.edu.ifms</groupId>
     <artifactId>ursus-arctos</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <description>Project that uses Swing to construct the graphical interface and the stack structure to store student data</description>
 
     <organization>
         <name>com.github.gaboso</name>
         <url>https://github.com/Gaboso/UrsusArctos</url>
     </organization>
-    <licenses>
-        <license>
-            <name>GNU General Public License, version 3</name>
-            <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+
     <scm>
         <connection>
             scm:git:git://github.com/Gaboso/UrsusArctos.git
@@ -33,9 +27,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <slf4j.version>2.0.0-alpha4</slf4j.version>
-        <flatlaf.version>1.5</flatlaf.version>
-        <junit.version>5.7.2</junit.version>
+        <slf4j.version>2.0.0-alpha6</slf4j.version>
+        <flatlaf.version>2.0.1</flatlaf.version>
+        <junit.version>5.8.2</junit.version>
     </properties>
 
     <dependencies>
@@ -55,7 +49,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
 
@@ -92,14 +86,14 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.11.2</version>
+            <version>4.3.1</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
 
         <plugins>
             <plugin>
@@ -131,7 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
