@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 @Slf4j
-public class CadastroAluno {
+public class MainWindow {
 
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 42;
@@ -30,7 +30,7 @@ public class CadastroAluno {
     private final StudentStack stack;
     private JFrame mainFrame;
 
-    private CadastroAluno() {
+    private MainWindow() {
         stack = new StudentStack();
         initialize();
     }
@@ -39,7 +39,7 @@ public class CadastroAluno {
         EventQueue.invokeLater(() -> {
             try {
                 FlatDraculaIJTheme.setup();
-                CadastroAluno window = new CadastroAluno();
+                MainWindow window = new MainWindow();
                 window.mainFrame.setVisible(true);
             } catch (Exception e) {
                 log.error(e.getMessage());

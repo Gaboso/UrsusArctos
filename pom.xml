@@ -6,7 +6,7 @@
 
     <groupId>br.edu.ifms</groupId>
     <artifactId>ursus-arctos</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <description>Project that uses Swing to construct the graphical interface and the stack structure to store student data</description>
 
     <organization>
@@ -103,7 +103,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>br.edu.ifms.ed.CadastroAluno</mainClass>
+                            <mainClass>br.edu.ifms.ed.MainWindow</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
