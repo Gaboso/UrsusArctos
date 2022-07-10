@@ -39,7 +39,7 @@ public class Textual {
     public static final String SEM_ALUNOS_CADASTRADOS = "Não existem alunos cadastrados!";
     public static final String CONSULTA = "Consulta";
     public static final String CADASTRAR = "Cadastrar";
-    private static final String VERSION = "1.2.3";
+    private static final String VERSION = "1.2.4";
     public static final String TITLE_VERSION = TITLE + " - " + VERSION;
 
     private Textual() {

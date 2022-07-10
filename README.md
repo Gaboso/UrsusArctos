@@ -20,14 +20,14 @@ When you delete a student from the stack, all students who have been inserted af
 
 Run the __`build.bat`__ file for _Windows_ or __`build.sh`__ for _Linux_, both are in the root directory of this project
 
-> After execution, the file __`ursus-arctos-1.2.3.jar`__ will be generated in the directory `target`
+> After execution, the file __`ursus-arctos-1.2.4.jar`__ will be generated in the directory `target`
 
 ## How to use
 
 After build, run following command to start:
 
 ```shell
-java -jar ursus-arctos-1.2.3.jar
+java -jar ursus-arctos-1.2.4.jar
 ```
 
 ## Screenshot
